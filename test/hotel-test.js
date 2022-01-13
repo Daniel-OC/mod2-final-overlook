@@ -18,7 +18,7 @@ describe('Hotel', () => {
     rooms = roomsTestData.map(room => new Room(room));
     bookings = bookingData.map(booking => new Booking(booking));
     users = customersTestData.map(user => new User(user));
-    hotel = new Hotel(hotel, rooms, bookings, users);
+    hotel = new Hotel(rooms, bookings, users);
   });
 
   it('should have a bookings array', () => {
