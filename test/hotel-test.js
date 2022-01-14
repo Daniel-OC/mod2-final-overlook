@@ -37,5 +37,15 @@ describe('Hotel', () => {
     expect(hotel.allUsers).to.be.an('array')
   });
 
+  it('should have an updateAvailableRooms method', () => {
+    expect(hotel.updateAvailableRooms).to.be.a('function');
+  });
+
+  it('should update available rooms with a list of available rooms on a given date.', () => {
+    hotel.updateAvailableRooms("2022/02/16");
+    expect(hotel.availableRooms).to.deep.equal([rooms[0], rooms[1], rooms[3], rooms[4]]);
+  });
+
+
  
 })
