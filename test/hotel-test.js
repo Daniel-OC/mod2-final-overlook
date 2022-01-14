@@ -15,10 +15,37 @@ describe('Hotel', () => {
   let users;
 
   beforeEach(() => {
-    rooms = roomsTestData.map(room => new Room(room))
-    bookings = bookingData.map(booking => new Booking(booking))
-    users = customersTestData.map(user => new User(user))
-    hotel = new Hotel(hotel, rooms, bookings, users)
-    
-  })
+    rooms = roomsTestData.map(room => new Room(room));
+    bookings = bookingData.map(booking => new Booking(booking));
+    users = customersTestData.map(user => new User(user));
+    hotel = new Hotel(rooms, bookings, users);
+  });
+
+  it('should have a bookings array', () => {
+    expect(hotel.bookings).to.be.an('array');
+  });
+
+  it('should have an allRooms array', () => {
+    expect(hotel.allRooms).to.be.an('array');
+  });
+
+  it('should have an availableRooms array', () => {
+    expect(hotel.availableRooms).to.be.an('array');
+  });
+
+  it('should have an allUsers array', () => {
+    expect(hotel.allUsers).to.be.an('array')
+  });
+
+  it('should have an updateAvailableRooms method', () => {
+    expect(hotel.updateAvailableRooms).to.be.a('function');
+  });
+
+  it('should update available rooms with a list of available rooms on a given date.', () => {
+    hotel.updateAvailableRooms("2022/02/16");
+    expect(hotel.availableRooms).to.deep.equal([rooms[0], rooms[1], rooms[3], rooms[4]]);
+  });
+
+
+ 
 })
