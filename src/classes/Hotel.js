@@ -19,6 +19,11 @@ class Hotel{
      return acc
    },[])
   };
+ 
+  findUsersBookings(userID) {
+    return this.bookings.filter(booking => booking.userID === userID)
+  }
+
 }
 
 export default Hotel;
