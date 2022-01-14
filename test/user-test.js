@@ -1,7 +1,6 @@
 import { expect } from "chai";
 import User from "../src/classes/User"
-import customersTestData from "../src/testing-data/Customers-test-data";
-import CustomersTestData from "../src/testing-data/Customers-test-data";
+import customersTestData from "../src/testing-data/customers-test-data";
 
 describe('User', () => {
 
