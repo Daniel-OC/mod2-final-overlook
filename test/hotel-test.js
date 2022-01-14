@@ -46,6 +46,12 @@ describe('Hotel', () => {
     expect(hotel.availableRooms).to.deep.equal([rooms[0], rooms[1], rooms[3], rooms[4]]);
   });
 
+  it('should have a findUsersBookings method', () => {
+    expect(hotel.findUsersBookings).to.be.a('function');
+  });
 
+  it('should return all of a users bookings', () => {
+    expect(hotel.findUsersBookings(21)).to.deep.equal([bookings[0], bookings[1]])
+  })
  
 })
