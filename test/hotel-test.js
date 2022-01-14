@@ -51,7 +51,15 @@ describe('Hotel', () => {
   });
 
   it('should return all of a users bookings', () => {
-    expect(hotel.findUsersBookings(21)).to.deep.equal([bookings[0], bookings[1]])
-  })
+    expect(hotel.findUsersBookings(1)).to.deep.equal([bookings[0], bookings[1]])
+  });
+
+  it('should have a determineAllBookingsCost function', () => {
+    expect(hotel.determineUserBookingsCost).to.be.a('function');
+  });
+
+  it('should determine the total money spent by the user on the hotel', () => {
+    expect(hotel.determineUserBookingsCost(hotel.findUsersBookings(1))).to.deep.equal('787.84');
+  });
  
 })
