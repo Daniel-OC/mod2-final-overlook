@@ -31,7 +31,13 @@ class User{
   divideBookingsByDate() {
     let currentDate = new Date().toISOString().substr(0,10).replaceAll("-","/")
     console.log(currentDate)
-
+    this.allBookings.forEach(booking => {
+      if (booking.date < currentDate) {
+        this.pastBookings.push(booking)
+      } else {
+        this.upcomingBookings.push(booking)
+      }
+    })
   }
 }
 
