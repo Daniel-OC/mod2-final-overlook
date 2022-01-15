@@ -1,6 +1,201 @@
 /* This is an example of how to import a partial scss file*/
 @import '_variables';
 
+html { 
+  background: url('../images/overlook\ sketch.png') no-repeat center 100px fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  
+}
+
 body {
-  background: $primary-background;
+  margin: 0;
+	overflow: hidden;
+	height: 100vh;
+  font-family: 'Sen', sans-serif;
+}
+
+main {
+	height: 100%;
+}
+
+::-webkit-scrollbar {
+  width:0;
+  background: transparent;
+}
+
+.logo {
+  font-family: 'Monoton', cursive;
+}
+
+.flex {
+	display: flex;
+}
+
+.row {
+	flex-direction: row;
+	align-items: center;
+}
+
+.start {
+	flex-flow: column wrap;
+}
+
+.end {
+	flex-direction: row-reverse;
+}
+
+.column {
+	flex-direction: column;
+	align-items: center;
+}
+
+.around {
+	justify-content: space-around;
+}
+
+.between {
+	justify-content: space-between;
+}
+
+.align-start {
+	align-items: flex-start;
+}
+
+.center {
+	align-self: center;
+	justify-content: center;
+}
+
+.basis {
+	flex-basis: 40%;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.white {
+  background-color: $white;
+}
+
+.dark {
+  background-color: $dark;
+}
+
+.test-bg {
+  background-color: #b0e7f6;
+}
+
+.main-display-bg {
+  background-color: rgba(176, 231, 246, .9);
+  fill-opacity: .5;
+
+}
+.main-display-inner-box {
+  margin: 5px;
+}
+
+.full-width {
+  width: 100%
+}
+
+.orange-font {
+  color: #b0e7f6;
+  font-family: 'Gentium Book Basic', serif;
+}
+
+.pink-font {
+  color: #36474c;
+}
+
+.dark-background {
+  background-color: #36474c;
+}
+
+.blue-font {
+  color: #b0e7f6
+}
+
+
+.main-display-height {
+  height:60vh;
+}
+
+.margin-none {
+  margin: 0;
+}
+
+.width-80 {
+  width: 80%;
+}
+
+.width-45 {
+  width: 55%
+}
+
+.width-35 {
+  width: 25%;
+}
+
+.height-20 {
+  height: 20%
+}
+
+.height-15 {
+  height: 15%
+}
+
+.text-center {
+  text-align: center;
+}
+
+.align-end {
+  align-items: flex-end;
+}
+
+// .carpet {
+//   background-image: url('../images/shining\ carpet.png');
+//   background-repeat: no-repeat;
+//   height: 100vh;
+//   width: 10%;
+//   border: 5px solid $dark
+// }
+
+.font-xxl {
+  font-size: xxx-large;
+}
+
+.font-larger {
+  font-size: larger;
+}
+
+.y-scroll {
+	overflow-y: scroll;
+}
+
+.sml-mrgn-btm {
+  margin-bottom: 5px;
+}
+
+.med-mrgn-btm {
+  margin-bottom: 10px;
+}
+
+.dark {
+  background-color: $dark;
+}
+
+.full-height {
+  height: 100vh
+}
+
+.align-start {
+  align-items: flex-start;
 }
