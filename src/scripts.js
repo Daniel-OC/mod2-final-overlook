@@ -31,15 +31,14 @@ Promise.all([getAllRooms, getAllBookings, getAllUsers])
 
 
 const updateHotel = (data) => {
-  console.log(typeof(data[0]), data)
   hotel = new Hotel(data[0].rooms, data[1].bookings, data[2].customers);
-  
 };
 
 const startSite = () => {
   user = new User (hotel.allUsers[0]);
-  user.bookings = hotel.findUsersBookings(user.id)
-  console.log(user.bookings)
+  user.allBookings = hotel.findUsersBookings(user.id)
+  user.divideBookingsByDate()
+  console.log(user.allBookings)
   console.log(user)
   domUpdates.updateLeftDisplay(user);
 };
