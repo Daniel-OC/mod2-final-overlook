@@ -24,12 +24,12 @@ class Hotel{
     return this.bookings.filter(booking => booking.userID === userID)
   }
 
-  determineUserBookingsCost(userBookings) {
-    return parseFloat(userBookings.reduce((acc, booking) => {
-      acc += this.allRooms.find(room => room.number === booking.roomNumber).costPerNight
-    return acc
-    }, 0)).toFixed(2)
-  }
+  // determineUserBookingsCost(userBookings) {
+  //   return parseFloat(userBookings.reduce((acc, booking) => {
+  //     acc += this.allRooms.find(room => room.number === booking.roomNumber).costPerNight
+  //   return acc
+  //   }, 0)).toFixed(2)
+  // }
 
 }
 
