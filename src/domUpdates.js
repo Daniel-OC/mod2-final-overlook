@@ -31,8 +31,29 @@ let domUpdates = {
   updateLeftDisplay(user) {
     let userCost = document.querySelector('#totalCost')
     let bookingDisplay = document.querySelector('#bookingDisplay')
-    userCost.innerText = `$${hotel.determineUserBookingsCost(hotel.findUsersBookings(user.id))}`
-    domUpdates.updateUserBookings (bookingDisplay)
+    user.determineBookingCosts(hotel.allRooms)
+    userCost.innerText = `$${user.calculateTotalCosts()}`
+    domUpdates.updateUserBookings(bookingDisplay)
+  },
+  
+  updateUserBookings(bookingDisplay) {
+    bookingDisplay.innerHTML = '<h3 class="self-center pink-font">Upcoming Bookings</h3>'
+    user.determineBookingCosts(hotel.allRooms)
+    user.upcomingBookings.forEach(booking => {
+      bookingDisplay.innerHTML += `
+    <section class="flex column around ">
+    <p>Room ${booking.roomNumber}, ${booking.date}</p>
+    <p>$${booking.price}</p>
+  </section>`
+    });
+    bookingDisplay.innerHTML += '<h3 class="self-center pink-font">Past Bookings</h3>'
+    user.pastBookings.forEach(booking => {
+      bookingDisplay.innerHTML += `
+    <section class="flex column around ">
+    <p>Room ${booking.roomNumber}, ${booking.date}</p>
+    <p>$${booking.price}</p>
+  </section>`
+    })
   }
 }
 
