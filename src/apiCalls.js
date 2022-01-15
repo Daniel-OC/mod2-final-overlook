@@ -2,9 +2,9 @@ const getAllUsers =
   fetch('http://localhost:3001/api/v1/customers	')
     .then(response => response.json());
 
-const getSingleUser =
-  fetch('http://localhost:3001/api/v1/customers/<id>')
-  .then(response => response.json());
+// const getSingleUser =
+//   fetch('http://localhost:3001/api/v1/customers/<id>')
+//   .then(response => response.json());
 
 const getAllRooms =
   fetch('http://localhost:3001/api/v1/rooms	')
@@ -35,4 +35,4 @@ async function deleteBooking(bookingUpdate) {
 };
 
 
-module.exports = {getAllUsers, getSingleUser, getAllRooms, getAllBookings, addNewBooking, deleteBooking};
+module.exports = {getAllUsers, getAllRooms, getAllBookings, addNewBooking, deleteBooking};
