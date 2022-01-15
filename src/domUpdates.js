@@ -54,6 +54,32 @@ let domUpdates = {
     <p>$${booking.price}</p>
   </section>`
     })
+  },
+
+
+  //to do tomorrow to function below:
+  
+  updateRightDisplay() {
+    let dateInput = document.querySelector('#dateSelector')
+    let availableRooms = document.querySelector('#bottomRightSection')
+    if (dateInput.value) {
+      hotel.updateAvailableRooms(dateInput)
+    }
+    hotel.availableRooms.forEach(room => {
+      availableRooms.innerHTML += `
+      <section id="roomCard" class="flex row between full-width">
+            <section>
+              <p class="margin-none">Room ${room.roomNumber}</p>
+              <p class="font-xxl margin-none">15</p>
+            </section>
+            <section class="flex row between">
+              <section class="flex column">
+                <p class="sml-mrgn-btm margin-none">${room.roomType}</p>
+                <p class="sml-mrgn-btm margin-none">Beds:${room.beds} ${room.bedSize}</p>
+                <p class="sml-mrgn-btm margin-none">Bidet: ${room.bidet}</p>
+              </section>
+            </section>`
+    })
   }
 }
 
