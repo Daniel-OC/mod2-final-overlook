@@ -21,8 +21,17 @@ class Hotel{
   };
  
   findUsersBookings(userID) {
-    return this.bookings.filter(booking => booking.userID === userID)
-  }
+    return this.bookings.filter(booking => booking.userID === userID);
+  };
+
+  getAvailableRoomTypes() {
+    return this.availableRooms.reduce((acc, room) => {
+      if (!acc.includes(room.roomType)) {
+        acc.push(room.roomType);
+      }
+      return acc;
+    },[]);
+  };
 
   // determineUserBookingsCost(userBookings) {
   //   return parseFloat(userBookings.reduce((acc, booking) => {
@@ -30,7 +39,7 @@ class Hotel{
   //   return acc
   //   }, 0)).toFixed(2)
   // }
-
-}
+  
+};
 
 export default Hotel;

@@ -21,16 +21,12 @@ let hotel;
 
 Promise.all([getAllRooms, getAllBookings, getAllUsers])
   .then(data => {
-    updateHotel(data);
+    createHotel(data);
     startSite();
   })
   .catch(error => console.log(error))
 
-
-
-
-
-const updateHotel = (data) => {
+const createHotel = (data) => {
   hotel = new Hotel(data[0].rooms, data[1].bookings, data[2].customers);
 };
 
@@ -44,10 +40,26 @@ const startSite = () => {
 };
 
 
+
+const updateBookings = (data) => {
+  console.log(hotel.bookings)
+  hotel.bookings = data.bookings.map(booking => booking)
+  console.log(hotel.bookings)
+}
+
+async function sendBookingToApi(date, roomNumber) { 
+  let booking = user.createBookingObject(date, roomNumber);
+  await addNewBooking(booking)
+  await getAllBookings.then(data => updateBookings(data))
+  await startSite()
+}
+
+
 export {
   user, 
   hotel,
-  updateHotel,
+  createHotel,
   startSite,
+  sendBookingToApi,
 }
 
