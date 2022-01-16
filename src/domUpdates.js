@@ -3,6 +3,7 @@ import {
   hotel,
   updateHotel,
   startSite,
+  sendBookingToApi,
 } from './scripts'
 
 const dateInput = document.querySelector('#dateSelector');
@@ -84,7 +85,7 @@ let domUpdates = {
               </section>
             </section>
             <section class="flex column center">
-              <button>$${room.costPerNight}</button>
+              <button id="${room.number}" class="button">$${room.costPerNight}</button>
               <p>BOOK NOW</p>
             </section>
         </section>`
@@ -108,8 +109,6 @@ let domUpdates = {
     var checkboxes = document.querySelectorAll('.checkbox')
     console.log(checkboxes)
     let checkboxChecked
-    
-    
   },
 
   populateRoomTypes(roomTypes) {
@@ -132,10 +131,13 @@ let domUpdates = {
   },
 
   determineRightDisplayTarget(event) {
+    console.log(event.target.tagname)
     if (event.target.tagName === 'checkbox') {
-      console.log("tagname!",event.target.tagName)
       domUpdates.updateRightDisplay()
-    } 
+    } else if (event.target.classList.contains('button')) {
+      console.log(event.target.id)
+      sendBookingToApi(dateSelector.value.replaceAll("-","/"), event.target.id)
+    }
   }
 }
 
