@@ -22,7 +22,7 @@ class Hotel{
  
   findUsersBookings(userID) {
     return this.bookings.filter(booking => booking.userID === userID);
-  }
+  };
 
   getAvailableRoomTypes() {
     return this.availableRooms.reduce((acc, room) => {
@@ -39,7 +39,7 @@ class Hotel{
   //   return acc
   //   }, 0)).toFixed(2)
   // }
-
-}
+  
+};
 
 export default Hotel;
