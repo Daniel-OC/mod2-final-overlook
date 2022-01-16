@@ -39,6 +39,15 @@ class User{
       }
     })
   }
+
+  createBookingObject(date, roomNumber) {
+    let bookingObject = { 
+      userID: this.id,
+      date: date,
+      roomNumber: parseInt(roomNumber)
+    }
+  return bookingObject
+  }
 }
 
 export default User;
