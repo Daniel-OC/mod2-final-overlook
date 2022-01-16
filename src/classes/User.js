@@ -7,7 +7,8 @@ class User{
     this.name = user.name,
     this.allBookings = [],
     this.pastBookings = [],
-    this.upcomingBookings = []
+    this.upcomingBookings = [],
+    this.preferredType = []
   }
 
   determineBookingCosts(hotelRooms) {
@@ -17,7 +18,6 @@ class User{
           booking.price = room.costPerNight
         }
       })
-      
     })
   }
 
@@ -30,7 +30,6 @@ class User{
 
   divideBookingsByDate() {
     let currentDate = new Date().toISOString().substr(0,10).replaceAll("-","/")
-    console.log(currentDate)
     this.allBookings.forEach(booking => {
       if (booking.date < currentDate) {
         this.pastBookings.push(booking)
