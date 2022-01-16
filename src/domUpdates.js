@@ -6,7 +6,7 @@ import {
 } from './scripts'
 
 const dateInput = document.querySelector('#dateSelector');
-
+const mainDisplayRight = document.querySelector('#mainDisplayRight')
 
 
 let domUpdates = {
@@ -65,17 +65,12 @@ let domUpdates = {
   </section>`
     })
   },
-
-
-  //to do tomorrow to function below:
   
-  updateRightDisplay() {
-    console.log(dateSelector, dateSelector.value)
-    let availableRooms = document.querySelector('#bottomRightSection')
-    availableRooms.innerHTML = ''
-    hotel.updateAvailableRooms(dateSelector.value.replaceAll("-","/"))
-    hotel.availableRooms.forEach(room => {
-      availableRooms.innerHTML += `
+  fillRightDisplay(updatedRooms) {
+    let availableRoomArea = document.querySelector('#bottomRightSection')
+    availableRoomArea.innerHTML = ''
+    updatedRooms.forEach(room => {
+      availableRoomArea.innerHTML += `
       <section id="roomCard" class="flex row between full-width">
             <section>
               <p class="margin-none">Room</p>
@@ -89,16 +84,65 @@ let domUpdates = {
               </section>
             </section>
             <section class="flex column center">
-              <button>$450</button>
+              <button>$${room.costPerNight}</button>
               <p>BOOK NOW</p>
             </section>
         </section>`
     })
+  },
+
+  updateRightDisplay() {
+    hotel.updateAvailableRooms(dateSelector.value.replaceAll("-","/"))
+    domUpdates.populateRoomTypes(hotel.getAvailableRoomTypes())
+    domUpdates.determineCheckedTag()
+    
+    // if (for ())) {
+    //   var updatedRooms = domUpdates.filterByRoomType(domUpdates.determineCheckedTag(checkboxes))
+    // } else {
+      var updatedRooms = hotel.availableRooms
+    // }
+    domUpdates.fillRightDisplay(updatedRooms)
+  },
+
+  determineCheckedTag() {
+    var checkboxes = document.querySelectorAll('.checkbox')
+    console.log(checkboxes)
+    let checkboxChecked
+    
+    
+  },
+
+  populateRoomTypes(roomTypes) {
+    let checkboxArea = document.querySelector('#roomCheckBoxes')
+    checkboxArea.innerHTML = ''
+    roomTypes.forEach(type => {
+      checkboxArea.innerHTML += `
+      <input type="checkbox" value="${type}" class"checkbox" >
+      <label for="single">${type.charAt(0).toUpperCase() + type.slice(1)}</label>`
+    })
+  },
+  
+  pickRoomType(type) {
+    filterByRoomTypes(type)
+  },
+
+  //should eventually prolly live in hotel or scripts
+  filterByRoomType(type) {
+    return hotel.availableRooms.filter(room => room.roomType === type)
+  },
+
+  determineRightDisplayTarget(event) {
+    if (event.target.tagName === 'checkbox') {
+      console.log("tagname!",event.target.tagName)
+      domUpdates.updateRightDisplay()
+    } 
   }
 }
 
 //Event Listeners
 dateInput.addEventListener('change', domUpdates.updateRightDisplay)
+
+mainDisplayRight.addEventListener('click', domUpdates.determineRightDisplayTarget)
 
 
 export {
