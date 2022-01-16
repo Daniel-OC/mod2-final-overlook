@@ -11,7 +11,7 @@ const getAllRooms =
   .then(response => response.json());
 
 const getAllBookings =
-  fetch('http://localhost:3001/api/v1/bookings	')
+  fetch('http://localhost:3001/api/v1/bookings')
   .then(response => response.json());
 
 async function addNewBooking(bookingUpdate) {
