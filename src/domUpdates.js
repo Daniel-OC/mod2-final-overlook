@@ -96,8 +96,8 @@ let domUpdates = {
     let updatedRooms;
     hotel.updateAvailableRooms(dateSelector.value.replaceAll("-","/"))
     if (event.target.type === 'checkbox') {
-      console.log('checkbox')
-      updatedRooms = domUpdates.filterByRoomType(event.target)
+      user.modifyPreferredTypes(event.target.value)
+      updatedRooms = domUpdates.filterByRoomType(user.preferredTypes).length ? domUpdates.filterByRoomType(user.preferredTypes) : hotel.availableRooms
     } else {
       updatedRooms = hotel.availableRooms
       domUpdates.populateRoomTypes(hotel.getAvailableRoomTypes())
@@ -116,13 +116,15 @@ let domUpdates = {
   },
 
   //should eventually prolly live in hotel or scripts
-  filterByRoomType(eventTarget) {
-    if (eventTarget.checked) {
-      return hotel.availableRooms.filter(room => room.roomType === eventTarget.value)
-    } else {
-      return hotel.availableRooms
-    }
-  
+  filterByRoomType(types) {
+    return hotel.availableRooms.reduce((acc,room) => {
+      types.forEach(type => {
+        if (type === room.roomType) {
+          acc.push(room)
+        }
+      })
+      return acc
+    },[])
   },
 
   determineRightDisplayTarget(event) {
