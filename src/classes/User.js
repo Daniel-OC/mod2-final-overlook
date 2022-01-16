@@ -1,4 +1,4 @@
-import { hotel } from "../scripts";
+import { hotel, user } from "../scripts";
 import Hotel from "./Hotel";
 
 class User{
@@ -8,7 +8,7 @@ class User{
     this.allBookings = [],
     this.pastBookings = [],
     this.upcomingBookings = [],
-    this.preferredType = []
+    this.preferredTypes = []
   }
 
   determineBookingCosts(hotelRooms) {
@@ -19,6 +19,14 @@ class User{
         }
       })
     })
+  }
+
+  modifyPreferredTypes(value) {
+    if (this.preferredTypes.includes(value)) {
+      user.preferredTypes.splice(user.preferredTypes.indexOf(value),1)
+    } else {
+      user.preferredTypes.push(value)
+    }
   }
 
   calculateTotalCosts() {
