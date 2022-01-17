@@ -4,10 +4,16 @@ import {
   updateHotel,
   startSite,
   sendBookingToApi,
+  checkForLogIn,
 } from './scripts'
 
 const dateInput = document.querySelector('#dateSelector');
-const mainDisplayRight = document.querySelector('#mainDisplayRight')
+const mainDisplayRight = document.querySelector('#mainDisplayRight');
+const foyer = document.querySelector('#foyer');
+const landingPageGraphic = document.querySelector('#openingGraphic');
+const loginView = document.querySelector('#loginView');
+const customerView = document.querySelector('#customerView');
+const loginButton = document.querySelector('#loginButton')
 
 
 let domUpdates = {
@@ -94,7 +100,7 @@ let domUpdates = {
       })
     } else {
       availableRoomArea.innerHTML = ''
-      availableRoomArea.innerText = "Sorry, but we ain't got no goddang rooms that day"
+      availableRoomArea.innerText = "Sorry, but we don't have any openings that match your search results! Please try adjusting your search parameters."
 
     }
     
@@ -118,7 +124,7 @@ let domUpdates = {
     checkboxArea.innerHTML = ''
     roomTypes.forEach(type => {
       checkboxArea.innerHTML += `
-      <input type="checkbox" value="${type}" class"checkbox" >
+      <input id="${type}" type="checkbox" value="${type}">
       <label for="${type}">${type.charAt(0).toUpperCase() + type.slice(1)}</label>`
     })
   },
@@ -135,20 +141,38 @@ let domUpdates = {
     },[])
   },
 
+  congratulateUserOnBooking() {
+    let availableRoomArea = document.querySelector('#bottomRightSection');
+    availableRoomArea.innerHTML = '';
+    availableRoomArea.innerText = "Congratulations, you booked the hell out the room!"
+    dateSelector.value = null;
+  },
+
   determineRightDisplayTarget(event) {
     if (event.target.type === 'checkbox') {
       domUpdates.updateRightDisplay(event);
     } else if (event.target.classList.contains('button')) {
       console.log(event.target.id);
       sendBookingToApi(dateSelector.value.replaceAll("-","/"), event.target.id);
+      domUpdates.congratulateUserOnBooking()
     }
-  }
+  },
+
+  showLogin() {
+    domUpdates.addClass([foyer], 'hidden');
+    domUpdates.removeClass([loginView], 'hidden');
+  },
+  
 }
 
 //Event Listeners
 dateInput.addEventListener('change', domUpdates.updateRightDisplay)
 
 mainDisplayRight.addEventListener('click', domUpdates.determineRightDisplayTarget)
+
+landingPageGraphic.addEventListener('mouseover', domUpdates.showLogin)
+
+loginButton.addEventListener('click', checkForLogIn)
 
 
 export {

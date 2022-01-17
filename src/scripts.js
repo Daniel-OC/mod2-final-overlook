@@ -6,7 +6,7 @@ import './css/base.scss';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
-import {getInitialUsers, getInitialRooms, getInitialBookings, addNewBooking, deleteBooking, getAllBookings} from './apiCalls'
+import {getInitialUsers, getInitialRooms, getInitialBookings, getSingleUser, addNewBooking, deleteBooking, getAllBookings} from './apiCalls'
 import {
   domUpdates,
   
@@ -31,9 +31,24 @@ const createHotel = (data) => {
 };
 
 const startSite = () => {
-  user = new User (hotel.allUsers[0]);
+  // user = new User (hotel.allUsers[0]);
   updateSite()
 };
+
+const checkForLogIn = () => {
+  let username = document.querySelector('#enterUserName');
+  let password = document.querySelector('#enterPassword');
+  if (((username.value.slice(0,8) === 'customer') && (username.value.length <= 10)) && password.value === 'overlook2021') {
+    domUpdates.addClass([loginView], 'hidden');
+    domUpdates.removeClass([customerView], 'hidden');
+    createInitialUser()
+  }
+};
+
+createInitialUser = (id) => {
+  getSingleUser(id).then(data => console.log(data))
+}
+
 
 const updateSite = () => {
   console.log(user)
@@ -62,5 +77,6 @@ export {
   createHotel,
   startSite,
   sendBookingToApi,
+  checkForLogIn
 }
 

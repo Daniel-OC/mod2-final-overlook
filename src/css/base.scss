@@ -106,6 +106,10 @@ main {
   width: 100%
 }
 
+.gentium {
+  font-family: 'Gentium Book Basic', serif;
+}
+
 .orange-font {
   color: #b0e7f6;
   font-family: 'Gentium Book Basic', serif;
@@ -123,6 +127,25 @@ main {
   color: #b0e7f6
 }
 
+.opening-page {
+  
+  background: linear-gradient(45deg, black, transparent);
+}
+
+.opening-text {
+  font-size: 132px;
+  color: white;
+  padding-bottom: 160px;
+  padding-right: 155px;
+}
+
+.opening-text:hover {
+  color: #36474c
+}
+
+.height-45 {
+  height:45%
+}
 
 .main-display-height {
   height:60vh;
@@ -136,11 +159,11 @@ main {
   width: 80%;
 }
 
-.width-45 {
+.width-55 {
   width: 55%
 }
 
-.width-35 {
+.width-25 {
   width: 25%;
 }
 
@@ -198,4 +221,8 @@ main {
 
 .align-start {
   align-items: flex-start;
+}
+
+.hidden {
+  display: none;
 }
