@@ -1,4 +1,4 @@
-import { hotel } from "../scripts";
+import { hotel, user } from "../scripts";
 import Hotel from "./Hotel";
 
 class User{
@@ -7,7 +7,8 @@ class User{
     this.name = user.name,
     this.allBookings = [],
     this.pastBookings = [],
-    this.upcomingBookings = []
+    this.upcomingBookings = [],
+    this.preferredTypes = []
   }
 
   determineBookingCosts(hotelRooms) {
@@ -17,8 +18,15 @@ class User{
           booking.price = room.costPerNight
         }
       })
-      
     })
+  }
+
+  modifyPreferredTypes(value) {
+    if (this.preferredTypes.includes(value)) {
+      user.preferredTypes.splice(user.preferredTypes.indexOf(value),1)
+    } else {
+      user.preferredTypes.push(value)
+    }
   }
 
   calculateTotalCosts() {
@@ -30,7 +38,6 @@ class User{
 
   divideBookingsByDate() {
     let currentDate = new Date().toISOString().substr(0,10).replaceAll("-","/")
-    console.log(currentDate)
     this.allBookings.forEach(booking => {
       if (booking.date < currentDate) {
         this.pastBookings.push(booking)

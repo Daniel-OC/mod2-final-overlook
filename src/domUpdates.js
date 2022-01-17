@@ -92,23 +92,17 @@ let domUpdates = {
     })
   },
 
-  updateRightDisplay() {
+  updateRightDisplay(event) {
+    let updatedRooms;
     hotel.updateAvailableRooms(dateSelector.value.replaceAll("-","/"))
-    domUpdates.populateRoomTypes(hotel.getAvailableRoomTypes())
-    domUpdates.determineCheckedTag()
-    
-    // if (for ())) {
-    //   var updatedRooms = domUpdates.filterByRoomType(domUpdates.determineCheckedTag(checkboxes))
-    // } else {
-      var updatedRooms = hotel.availableRooms
-    // }
+    if (event.target.type === 'checkbox') {
+      user.modifyPreferredTypes(event.target.value)
+      updatedRooms = domUpdates.filterByRoomType(user.preferredTypes).length ? domUpdates.filterByRoomType(user.preferredTypes) : hotel.availableRooms
+    } else {
+      updatedRooms = hotel.availableRooms
+      domUpdates.populateRoomTypes(hotel.getAvailableRoomTypes())
+    }
     domUpdates.fillRightDisplay(updatedRooms)
-  },
-
-  determineCheckedTag() {
-    var checkboxes = document.querySelectorAll('.checkbox')
-    console.log(checkboxes)
-    let checkboxChecked
   },
 
   populateRoomTypes(roomTypes) {
@@ -117,26 +111,28 @@ let domUpdates = {
     roomTypes.forEach(type => {
       checkboxArea.innerHTML += `
       <input type="checkbox" value="${type}" class"checkbox" >
-      <label for="single">${type.charAt(0).toUpperCase() + type.slice(1)}</label>`
+      <label for="${type}">${type.charAt(0).toUpperCase() + type.slice(1)}</label>`
     })
-  },
-  
-  pickRoomType(type) {
-    filterByRoomTypes(type)
   },
 
   //should eventually prolly live in hotel or scripts
-  filterByRoomType(type) {
-    return hotel.availableRooms.filter(room => room.roomType === type)
+  filterByRoomType(types) {
+    return hotel.availableRooms.reduce((acc,room) => {
+      types.forEach(type => {
+        if (type === room.roomType) {
+          acc.push(room)
+        }
+      })
+      return acc
+    },[])
   },
 
   determineRightDisplayTarget(event) {
-    console.log(event.target.tagname)
-    if (event.target.tagName === 'checkbox') {
-      domUpdates.updateRightDisplay()
+    if (event.target.type === 'checkbox') {
+      domUpdates.updateRightDisplay(event);
     } else if (event.target.classList.contains('button')) {
-      console.log(event.target.id)
-      sendBookingToApi(dateSelector.value.replaceAll("-","/"), event.target.id)
+      console.log(event.target.id);
+      sendBookingToApi(dateSelector.value.replaceAll("-","/"), event.target.id);
     }
   }
 }

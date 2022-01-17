@@ -1,4 +1,4 @@
-const getAllUsers =
+const getInitialUsers =
   fetch('http://localhost:3001/api/v1/customers	')
     .then(response => response.json());
 
@@ -6,15 +6,20 @@ const getAllUsers =
 //   fetch('http://localhost:3001/api/v1/customers/<id>')
 //   .then(response => response.json());
 
-const getAllRooms =
+const getInitialRooms =
   fetch('http://localhost:3001/api/v1/rooms	')
   .then(response => response.json());
 
-const getAllBookings =
+const getInitialBookings =
   fetch('http://localhost:3001/api/v1/bookings')
   .then(response => response.json());
 
-async function addNewBooking(bookingUpdate) {
+const getAllBookings = () => {
+  return fetch('http://localhost:3001/api/v1/bookings')
+  .then(response => response.json())
+}
+
+function addNewBooking(bookingUpdate) {
   return fetch('http://localhost:3001/api/v1/bookings', {
     method: "POST",
     headers: {
@@ -35,4 +40,4 @@ async function deleteBooking(bookingUpdate) {
 };
 
 
-module.exports = {getAllUsers, getAllRooms, getAllBookings, addNewBooking, deleteBooking};
+module.exports = {getInitialUsers, getInitialRooms, getInitialBookings, addNewBooking, deleteBooking, getAllBookings};
