@@ -2,10 +2,11 @@ const getInitialUsers =
   fetch('http://localhost:3001/api/v1/customers	')
     .then(response => response.json());
 
-// const getSingleUser =
-//   fetch('http://localhost:3001/api/v1/customers/<id>')
-//   .then(response => response.json());
-
+const getSingleUser = (id) => {
+  return fetch(`http://localhost:3001/api/v1/customers/<${id}>`)
+  .then(response => response.json());
+}
+  
 const getInitialRooms =
   fetch('http://localhost:3001/api/v1/rooms	')
   .then(response => response.json());
@@ -40,4 +41,4 @@ async function deleteBooking(bookingUpdate) {
 };
 
 
-module.exports = {getInitialUsers, getInitialRooms, getInitialBookings, addNewBooking, deleteBooking, getAllBookings};
+module.exports = {getInitialUsers, getInitialRooms, getInitialBookings, addNewBooking, deleteBooking, getAllBookings, getSingleUser};

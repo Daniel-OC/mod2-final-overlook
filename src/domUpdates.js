@@ -4,10 +4,16 @@ import {
   updateHotel,
   startSite,
   sendBookingToApi,
+  checkForLogIn,
 } from './scripts'
 
 const dateInput = document.querySelector('#dateSelector');
-const mainDisplayRight = document.querySelector('#mainDisplayRight')
+const mainDisplayRight = document.querySelector('#mainDisplayRight');
+const foyer = document.querySelector('#foyer');
+const landingPageGraphic = document.querySelector('#openingGraphic');
+const loginView = document.querySelector('#loginView');
+const customerView = document.querySelector('#customerView');
+const loginButton = document.querySelector('#loginButton')
 
 
 let domUpdates = {
@@ -150,13 +156,23 @@ let domUpdates = {
       sendBookingToApi(dateSelector.value.replaceAll("-","/"), event.target.id);
       domUpdates.congratulateUserOnBooking()
     }
-  }
+  },
+
+  showLogin() {
+    domUpdates.addClass([foyer], 'hidden');
+    domUpdates.removeClass([loginView], 'hidden');
+  },
+  
 }
 
 //Event Listeners
 dateInput.addEventListener('change', domUpdates.updateRightDisplay)
 
 mainDisplayRight.addEventListener('click', domUpdates.determineRightDisplayTarget)
+
+landingPageGraphic.addEventListener('mouseover', domUpdates.showLogin)
+
+loginButton.addEventListener('click', checkForLogIn)
 
 
 export {
