@@ -6,7 +6,7 @@ import './css/base.scss';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
-import {getInitialUsers, getInitialRooms, getInitialBookings, getSingleUser, addNewBooking, deleteBooking, getAllBookings} from './apiCalls'
+import {getAllUsers, getAllRooms, addNewBooking, deleteBooking, getAllBookings, getSingleUser} from './apiCalls'
 import {
   domUpdates,
   
@@ -16,13 +16,12 @@ import Booking from './classes/Booking';
 import User from './classes/User';
 import Hotel from './classes/Hotel';
 
-var user
-var hotel;
+let user;
+let hotel;
 
-Promise.all([getInitialRooms, getInitialBookings, getInitialUsers])
+Promise.all([getAllRooms(), getAllBookings(), getAllUsers()])
   .then(data => {
     createHotel(data);
-    startSite();
   })
   .catch(error => console.log(error))
 
@@ -30,35 +29,27 @@ const createHotel = (data) => {
   hotel = new Hotel(data[0].rooms, data[1].bookings, data[2].customers);
 };
 
-const startSite = () => {
-  // user = new User (hotel.allUsers[0]);
-  updateSite()
-};
-
-const checkForLogIn = () => {
-  let username = document.querySelector('#enterUserName');
-  let password = document.querySelector('#enterPassword');
-  if (((username.value.slice(0,8) === 'customer') && (username.value.length <= 10)) && password.value === 'overlook2021') {
-    domUpdates.addClass([loginView], 'hidden');
-    domUpdates.removeClass([customerView], 'hidden');
-    createInitialUser()
-  }
-};
-
-createInitialUser = (id) => {
-  getSingleUser(id).then(data => console.log(data))
-}
-
-
 const updateSite = () => {
   console.log(user)
-  user.allBookings = hotel.findUsersBookings(user.id)
-  user.divideBookingsByDate()
+  user.allBookings = hotel.findUsersBookings(user.id);
+  user.divideBookingsByDate();
   domUpdates.updateLeftDisplay(user);
-}
+};
 
 const updateBookings = (data) => {
   hotel.bookings = data.bookings;
+};
+
+const createInitialUser = (id) => {
+  getSingleUser(id).then(data => {
+    instantiateUser(data)
+    updateSite()
+  })
+};
+
+const instantiateUser = (data) => {
+  user = new User(data)
+  console.log(user);
 };
 
 const sendBookingToApi = (date, roomNumber) => {
@@ -75,8 +66,8 @@ export {
   user, 
   hotel,
   createHotel,
-  startSite,
   sendBookingToApi,
-  checkForLogIn
+  createInitialUser, 
+  updateSite
 }
 

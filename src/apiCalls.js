@@ -1,26 +1,28 @@
-const getInitialUsers =
-  fetch('http://localhost:3001/api/v1/customers	')
-    .then(response => response.json());
-
-const getSingleUser = (id) => {
-  return fetch(`http://localhost:3001/api/v1/customers/<${id}>`)
-  .then(response => response.json());
+const getAllUsers = () => {
+  return fetch('http://localhost:3001/api/v1/customers	')
+    .then(response => response.json())
+    .then(data => data);
 }
   
-const getInitialRooms =
-  fetch('http://localhost:3001/api/v1/rooms	')
-  .then(response => response.json());
-
-const getInitialBookings =
-  fetch('http://localhost:3001/api/v1/bookings')
-  .then(response => response.json());
+const getSingleUser = (id) => {
+  return fetch(`http://localhost:3001/api/v1/customers/${id}`)
+  .then(response => response.json())
+  .then(data => data);
+}
+  
+const getAllRooms = () => {
+  return fetch('http://localhost:3001/api/v1/rooms')
+  .then(response => response.json())
+  .then(data => data);
+}
 
 const getAllBookings = () => {
   return fetch('http://localhost:3001/api/v1/bookings')
   .then(response => response.json())
+  .then(data => data);
 }
 
-function addNewBooking(bookingUpdate) {
+const addNewBooking = (bookingUpdate) => {
   return fetch('http://localhost:3001/api/v1/bookings', {
     method: "POST",
     headers: {
@@ -30,7 +32,7 @@ function addNewBooking(bookingUpdate) {
   })
 };
 
-async function deleteBooking(bookingUpdate) {
+const deleteBooking = (bookingUpdate) => {
   return fetch('http://localhost:3001/api/v1/bookings	', {
     method:"POST",
     headers: {
@@ -41,4 +43,4 @@ async function deleteBooking(bookingUpdate) {
 };
 
 
-module.exports = {getInitialUsers, getInitialRooms, getInitialBookings, addNewBooking, deleteBooking, getAllBookings, getSingleUser};
+module.exports = {getAllUsers, getAllRooms, addNewBooking, deleteBooking, getAllBookings, getSingleUser};
