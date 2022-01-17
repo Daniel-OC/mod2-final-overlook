@@ -68,28 +68,36 @@ let domUpdates = {
   },
   
   fillRightDisplay(updatedRooms) {
+    console.log(updatedRooms)
     let availableRoomArea = document.querySelector('#bottomRightSection')
-    availableRoomArea.innerHTML = ''
-    updatedRooms.forEach(room => {
-      availableRoomArea.innerHTML += `
-      <section id="roomCard" class="flex row between full-width">
-            <section>
-              <p class="margin-none">Room</p>
-              <p class="font-xxl margin-none">${room.number}</p>
-            </section>
-            <section class="flex row between">
-              <section class="flex column">
-                <p class="sml-mrgn-btm margin-none">${room.roomType.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</p>
-                <p class="sml-mrgn-btm margin-none">Beds: ${room.numBeds} ${room.bedSize.charAt(0).toUpperCase() + room.bedSize.slice(1) }</p>
-                <p class="sml-mrgn-btm margin-none">Bidet: ${room.bidet ? 'Yes' : 'No'}</p>
+    if (updatedRooms.length) {
+      availableRoomArea.innerHTML = ''
+      updatedRooms.forEach(room => {
+        availableRoomArea.innerHTML += `
+        <section id="roomCard" class="flex row between full-width">
+              <section>
+                <p class="margin-none">Room</p>
+                <p class="font-xxl margin-none">${room.number}</p>
               </section>
-            </section>
-            <section class="flex column center">
-              <button id="${room.number}" class="button">$${room.costPerNight}</button>
-              <p>BOOK NOW</p>
-            </section>
-        </section>`
-    })
+              <section class="flex row between">
+                <section class="flex column">
+                  <p class="sml-mrgn-btm margin-none">${room.roomType.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</p>
+                  <p class="sml-mrgn-btm margin-none">Beds: ${room.numBeds} ${room.bedSize.charAt(0).toUpperCase() + room.bedSize.slice(1) }</p>
+                  <p class="sml-mrgn-btm margin-none">Bidet: ${room.bidet ? 'Yes' : 'No'}</p>
+                </section>
+              </section>
+              <section class="flex column center">
+                <button id="${room.number}" class="button">$${room.costPerNight}</button>
+                <p>BOOK NOW</p>
+              </section>
+          </section>`
+      })
+    } else {
+      availableRoomArea.innerHTML = ''
+      availableRoomArea.innerText = "Sorry, but we ain't got no goddang rooms that day"
+
+    }
+    
   },
 
   updateRightDisplay(event) {
@@ -97,7 +105,7 @@ let domUpdates = {
     hotel.updateAvailableRooms(dateSelector.value.replaceAll("-","/"))
     if (event.target.type === 'checkbox') {
       user.modifyPreferredTypes(event.target.value)
-      updatedRooms = domUpdates.filterByRoomType(user.preferredTypes).length ? domUpdates.filterByRoomType(user.preferredTypes) : hotel.availableRooms
+      updatedRooms = user.preferredTypes.length ? domUpdates.filterByRoomType(user.preferredTypes) : hotel.availableRooms
     } else {
       updatedRooms = hotel.availableRooms
       domUpdates.populateRoomTypes(hotel.getAvailableRoomTypes())
