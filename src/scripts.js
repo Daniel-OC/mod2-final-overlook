@@ -25,7 +25,18 @@ const handleInitialPromises = () => {
     createHotel(data)
     updateSite()
   })
-  .catch(error => console.log(error))
+  .catch(error => displayFetchErrorMessage(error))
+}
+
+const displayFetchErrorMessage = (error) => {
+  let message;
+  let bottomRightSection = document.querySelector('#bottomRightSection')
+  if (error.message === 'Failed to fetch') {
+    message = 'Something went wrong. Please check your internet connection';
+  } else {
+    message = error.message;
+  }
+  domUpdates.updateInnerText(bottomRightSection, message);
 }
 
 const createHotel = (data) => {
@@ -46,7 +57,7 @@ const updateBookings = (data) => {
 const createInitialUser = (id) => {
   return getSingleUser(id).then(data => {
     instantiateUser(data)
-  })
+  }).catch(error => displayFetchErrorMessage(error))
 };
 
 const instantiateUser = (data) => {
@@ -59,7 +70,7 @@ const sendBookingToApi = (date, roomNumber) => {
   addNewBooking(booking).then(getAllBookings).then(data => {
     updateBookings(data);
     updateSite();
-  });
+  }).catch(error => displayFetchErrorMessage(error));
 };
 
 
