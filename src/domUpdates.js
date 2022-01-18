@@ -41,10 +41,10 @@ let domUpdates = {
   },
 
   updateWithUpcomingBookings(bookingDisplay) {
-    bookingDisplay.innerHTML = '<h3 class="self-center pink-font">Upcoming Bookings</h3>';
+    bookingDisplay.innerHTML = '<h2 class="self-center pink-font" tabindex="0">Upcoming Bookings</h2>';
     user.upcomingBookings.forEach(booking => {
       bookingDisplay.innerHTML += `
-    <section class="flex column around ">
+    <section class="flex column around " tabindex="0" >
     <p>Room ${booking.roomNumber}, ${booking.date}</p>
     <p>$${booking.price}</p>
   </section>`
@@ -52,10 +52,10 @@ let domUpdates = {
   },
 
   updateWithOldBookings(bookingDisplay) {
-    bookingDisplay.innerHTML += '<h3 class="self-center pink-font">Past Bookings</h3>'
+    bookingDisplay.innerHTML += '<h3 class="self-center pink-font" tabindex="0">Past Bookings</h3>'
     user.pastBookings.forEach(booking => {
       bookingDisplay.innerHTML += `
-    <section class="flex column around ">
+    <section class="flex column around " tabindex="0">
     <p>Room ${booking.roomNumber}, ${booking.date}</p>
     <p>$${booking.price}</p>
   </section>`
@@ -69,16 +69,16 @@ let domUpdates = {
       availableRoomArea.innerHTML = ''
       updatedRooms.forEach(room => {
         availableRoomArea.innerHTML += `
-        <section id="roomCard" class="flex row between full-width">
+        <section id="roomCard" class="flex row between full-width" tabindex="0">
               <section>
                 <p class="margin-none">Room</p>
-                <p class="font-xxl margin-none">${room.number}</p>
+                <p class="font-xxl margin-none" tabindex="0">${room.number}</p>
               </section>
               <section class="flex row between">
-                <section class="flex column">
-                  <p class="sml-mrgn-btm margin-none">${room.roomType.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</p>
-                  <p class="sml-mrgn-btm margin-none">Beds: ${room.numBeds} ${room.bedSize.charAt(0).toUpperCase() + room.bedSize.slice(1) }</p>
-                  <p class="sml-mrgn-btm margin-none">Bidet: ${room.bidet ? 'Yes' : 'No'}</p>
+                <section class="flex column" >
+                  <p class="sml-mrgn-btm margin-none" tabindex="0">${room.roomType.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</p>
+                  <p class="sml-mrgn-btm margin-none" tabindex="0">Beds: ${room.numBeds} ${room.bedSize.charAt(0).toUpperCase() + room.bedSize.slice(1) }</p>
+                  <p class="sml-mrgn-btm margin-none" tabindex="0">Bidet: ${room.bidet ? 'Yes' : 'No'}</p>
                 </section>
               </section>
               <section class="flex column center">
@@ -98,6 +98,7 @@ let domUpdates = {
     let updatedRooms;
     hotel.updateAvailableRooms(dateSelector.value.replaceAll("-","/"))
     if (event.target.type === 'checkbox') {
+      console.log(hotel)
       user.modifyPreferredTypes(event.target.value)
       updatedRooms = user.preferredTypes.length ? hotel.filterByRoomType(user.preferredTypes) : hotel.availableRooms
     } else {
@@ -137,17 +138,19 @@ let domUpdates = {
   },
 
   checkForLogIn() {
-    let username = document.querySelector('#enterUserName');
-    let password = document.querySelector('#enterPassword');
-    if (((username.value.slice(0,8) === 'customer') && (username.value.length <= 10)) && password.value === 'overlook2021') {
+    // let username = document.querySelector('#enterUserName');
+    // let password = document.querySelector('#enterPassword');
+    // if (((username.value.slice(0,8) === 'customer') && (username.value.length <= 10)) && password.value === 'overlook2021') {
       domUpdates.addClass([loginView], 'hidden');
       domUpdates.removeClass([customerView], 'hidden');
-      createInitialUser(username.value.slice(8,10)).then(handleInitialPromises)
-    }
+      createInitialUser(25).then(handleInitialPromises)
+    // }
   }
 }
 
 //Event Listeners
+window.addEventListener('load', domUpdates.checkForLogIn)
+
 dateInput.addEventListener('change', domUpdates.updateRightDisplay)
 
 mainDisplayRight.addEventListener('click', domUpdates.determineRightDisplayTarget)
