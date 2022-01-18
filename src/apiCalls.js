@@ -1,13 +1,13 @@
 const checkForError = (response) => {
   if (!response.ok) {
-    throw new Error('Please make sure that all fields are filled out.');
+    throw new Error('Sorry, something went wrong with your booking! Please try again, making sure you picked a date and a room that are available.');
   } else {
     return response.json();
   }
 }
 
 const getAllUsers = () => {
-  return fetch('http://localhost:3001/api/v1/customers	')
+  return fetch('http://localhost:3001/api/v1/customers')
     .then(response => response.json())
     .then(data => data);
 }
