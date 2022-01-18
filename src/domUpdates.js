@@ -145,10 +145,10 @@ let domUpdates = {
       domUpdates.removeClass([customerView], 'hidden');
       createInitialUser(25).then(handleInitialPromises)
     }
-  }
 }
 
 //Event Listeners
+window.addEventListener('load', domUpdates.checkForLogIn)
 
 dateInput.addEventListener('change', domUpdates.updateRightDisplay)
 
