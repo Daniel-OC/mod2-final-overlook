@@ -12,6 +12,8 @@ import Hotel from './classes/Hotel';
 
 let user;
 let hotel;
+console.log(document)
+
 
 const handleInitialPromises = () => {
   return Promise.all([getAllRooms(), getAllBookings(), getAllUsers()])

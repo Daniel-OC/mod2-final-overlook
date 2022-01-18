@@ -46,20 +46,15 @@ describe('Hotel', () => {
     expect(hotel.availableRooms).to.deep.equal([rooms[0], rooms[1], rooms[3], rooms[4]]);
   });
 
-  it('should have a findUsersBookings method', () => {
-    expect(hotel.findUsersBookings).to.be.a('function');
+  it('should have getAvailableRoomTypes method', () => {
+    expect(hotel.getAvailableRoomTypes).to.be.a('function');
   });
 
-  it('should return all of a users bookings', () => {
-    expect(hotel.findUsersBookings(1)).to.deep.equal([bookings[0], bookings[1]])
-  });
+  it('should return a list of all roomtypes for availableRooms', () => {
+    hotel.updateAvailableRooms('2022/02/16');
+    console.log(hotel.availableRooms)
+    expect(hotel.getAvailableRoomTypes()).to.deep.equal(['residential suite', 'suite', 'single room'])
 
-  it('should have a determineAllBookingsCost function', () => {
-    expect(hotel.determineUserBookingsCost).to.be.a('function');
-  });
-
-  it('should determine the total money spent by the user on the hotel', () => {
-    expect(hotel.determineUserBookingsCost(hotel.findUsersBookings(1))).to.deep.equal('787.84');
-  });
+  })
  
 })

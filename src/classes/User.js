@@ -1,6 +1,3 @@
-import { hotel, user } from "../scripts";
-import Hotel from "./Hotel";
-
 class User{
   constructor(user) {
     this.id = user.id,
@@ -9,6 +6,10 @@ class User{
     this.pastBookings = [],
     this.upcomingBookings = [],
     this.preferredTypes = []
+  };
+
+  findUsersBookings(hotel) {
+    this.allBookings = hotel.bookings.filter(booking => booking.userID === this.id);
   };
 
   determineBookingCosts(hotelRooms) {
@@ -23,9 +24,9 @@ class User{
 
   modifyPreferredTypes(value) {
     if (this.preferredTypes.includes(value)) {
-      user.preferredTypes.splice(user.preferredTypes.indexOf(value),1);
+      this.preferredTypes.splice(this.preferredTypes.indexOf(value),1);
     } else {
-      user.preferredTypes.push(value);
+      this.preferredTypes.push(value);
     };
   };
 
@@ -45,10 +46,6 @@ class User{
         this.upcomingBookings.push(booking);
       };
     });
-  };
-
-  findUsersBookings(hotel) {
-    this.allBookings = hotel.bookings.filter(booking => booking.userID === this.id);
   };
 
   createBookingObject(date, roomNumber) {

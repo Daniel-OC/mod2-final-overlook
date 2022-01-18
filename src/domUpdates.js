@@ -10,7 +10,9 @@ const dateInput = document.querySelector('#dateSelector');
 const mainDisplayRight = document.querySelector('#mainDisplayRight');
 const loginView = document.querySelector('#loginView');
 const customerView = document.querySelector('#customerView');
-const loginButton = document.querySelector('#loginButton')
+const loginButton = document.querySelector('#loginButton');
+const foyer = document.querySelector('#foyer');
+const landingPageGraphic = document.querySelector('#openingGraphic');
 
 
 let domUpdates = {
@@ -121,7 +123,7 @@ let domUpdates = {
   congratulateUserOnBooking() {
     let availableRoomArea = document.querySelector('#bottomRightSection');
     availableRoomArea.innerHTML = '';
-    availableRoomArea.innerText = "Congratulations, you booked the crap out of that room!"
+    availableRoomArea.innerText = "Congratulations, the room is yours!"
     dateSelector.value = null;
   },
 
@@ -130,6 +132,7 @@ let domUpdates = {
       domUpdates.updateRightDisplay(event);
     } else if (event.target.classList.contains('button')) {
       sendBookingToApi(dateSelector.value.replaceAll("-","/"), event.target.id);
+      console.log(dateSelector.value)
       domUpdates.congratulateUserOnBooking()
     } 
   },
@@ -142,7 +145,13 @@ let domUpdates = {
       domUpdates.removeClass([customerView], 'hidden');
       createInitialUser(username.value.slice(8,10)).then(handleInitialPromises)
     }
-  }
+  },
+
+  showLogin() {
+    domUpdates.addClass([foyer], 'hidden');
+    domUpdates.removeClass([loginView], 'hidden');
+  },
+  
 }
 
 //Event Listeners
@@ -153,6 +162,7 @@ mainDisplayRight.addEventListener('click', domUpdates.determineRightDisplayTarge
 
 loginButton.addEventListener('click', domUpdates.checkForLogIn)
 
+landingPageGraphic.addEventListener('focus', domUpdates.showLogin)
 
 export {
   domUpdates,
