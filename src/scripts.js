@@ -5,14 +5,8 @@
 import './css/base.scss';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
 import {getAllUsers, getAllRooms, addNewBooking, deleteBooking, getAllBookings, getSingleUser} from './apiCalls'
-import {
-  domUpdates,
-  
-} from './domUpdates'
-import Room from './classes/Room';
-import Booking from './classes/Booking';
+import { domUpdates } from './domUpdates'
 import User from './classes/User';
 import Hotel from './classes/Hotel';
 
@@ -27,6 +21,21 @@ const handleInitialPromises = () => {
   })
   .catch(error => displayFetchErrorMessage(error))
 }
+
+const createInitialUser = (id) => {
+  return getSingleUser(id).then(data => {
+    console.log(data)
+    instantiateUser(data)
+  }).catch(error => displayFetchErrorMessage(error))
+};
+
+const sendBookingToApi = (date, roomNumber) => {
+  const booking = user.createBookingObject(date, roomNumber);
+  addNewBooking(booking).then(getAllBookings).then(data => {
+    updateBookings(data);
+    updateSite();
+  }).catch(error => displayFetchErrorMessage(error));
+};
 
 const displayFetchErrorMessage = (error) => {
   let message;
@@ -44,8 +53,7 @@ const createHotel = (data) => {
 };
 
 const updateSite = () => {
-  console.log(user)
-  user.allBookings = hotel.findUsersBookings(user.id);
+  user.findUsersBookings(hotel);
   user.divideBookingsByDate();
   domUpdates.updateLeftDisplay(user);
 };
@@ -54,26 +62,9 @@ const updateBookings = (data) => {
   hotel.bookings = data.bookings;
 };
 
-const createInitialUser = (id) => {
-  return getSingleUser(id).then(data => {
-    instantiateUser(data)
-  }).catch(error => displayFetchErrorMessage(error))
-};
-
 const instantiateUser = (data) => {
   user = new User(data)
-  console.log(user);
 };
-
-const sendBookingToApi = (date, roomNumber) => {
-  const booking = user.createBookingObject(date, roomNumber);
-  addNewBooking(booking).then(getAllBookings).then(data => {
-    updateBookings(data);
-    updateSite();
-  }).catch(error => displayFetchErrorMessage(error));
-};
-
-
 
 export {
   user, 

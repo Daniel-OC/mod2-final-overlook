@@ -19,6 +19,7 @@ class User{
         }
       })
     })
+    console.log(this.allBookings)
   }
 
   modifyPreferredTypes(value) {
@@ -46,6 +47,11 @@ class User{
       }
     })
   }
+
+  findUsersBookings(hotel) {
+    console.log(hotel.bookings)
+    this.allBookings = hotel.bookings.filter(booking => booking.userID === this.id);
+  };
 
   createBookingObject(date, roomNumber) {
     let bookingObject = { 

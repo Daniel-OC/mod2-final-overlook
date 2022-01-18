@@ -1,18 +1,13 @@
 import {
   user,
   hotel,
-  updateHotel,
   sendBookingToApi,
   createInitialUser,
-  updateSite,
-  createHotel,
   handleInitialPromises
 } from './scripts'
 
 const dateInput = document.querySelector('#dateSelector');
 const mainDisplayRight = document.querySelector('#mainDisplayRight');
-const foyer = document.querySelector('#foyer');
-const landingPageGraphic = document.querySelector('#openingGraphic');
 const loginView = document.querySelector('#loginView');
 const customerView = document.querySelector('#customerView');
 const loginButton = document.querySelector('#loginButton')
@@ -23,20 +18,12 @@ let domUpdates = {
     element.innerText = update;
   },
 
-  toggleClass(elements, rule) {
-    elements.forEach(item => item.classList.toggle(rule));
-  },
-
   removeClass(elements, rule) {
     elements.forEach(item => item.classList.remove(rule));
   },
 
   addClass(elements, rule) {
     elements.forEach(item => item.classList.add(rule));
-  },
-
-  displayUserView(user) {
-    domUpdates.updateUserCost(user)
   },
 
   updateLeftDisplay(user) {
@@ -105,7 +92,6 @@ let domUpdates = {
       availableRoomArea.innerText = "Sorry, but we don't have any openings that match your search results! Please try adjusting your search parameters."
 
     }
-    
   },
 
   updateRightDisplay(event) {
@@ -113,7 +99,7 @@ let domUpdates = {
     hotel.updateAvailableRooms(dateSelector.value.replaceAll("-","/"))
     if (event.target.type === 'checkbox') {
       user.modifyPreferredTypes(event.target.value)
-      updatedRooms = user.preferredTypes.length ? domUpdates.filterByRoomType(user.preferredTypes) : hotel.availableRooms
+      updatedRooms = user.preferredTypes.length ? hotel.filterByRoomType(user.preferredTypes) : hotel.availableRooms
     } else {
       updatedRooms = hotel.availableRooms
       domUpdates.populateRoomTypes(hotel.getAvailableRoomTypes())
@@ -132,21 +118,11 @@ let domUpdates = {
   },
 
   //should eventually prolly live in hotel or scripts
-  filterByRoomType(types) {
-    return hotel.availableRooms.reduce((acc,room) => {
-      types.forEach(type => {
-        if (type === room.roomType) {
-          acc.push(room)
-        }
-      })
-      return acc
-    },[])
-  },
 
   congratulateUserOnBooking() {
     let availableRoomArea = document.querySelector('#bottomRightSection');
     availableRoomArea.innerHTML = '';
-    availableRoomArea.innerText = "Congratulations, you booked the hell out the room!"
+    availableRoomArea.innerText = "Congratulations, you booked the crap out of that room!"
     dateSelector.value = null;
   },
 
@@ -157,12 +133,7 @@ let domUpdates = {
       console.log(event.target.id);
       sendBookingToApi(dateSelector.value.replaceAll("-","/"), event.target.id);
       domUpdates.congratulateUserOnBooking()
-    }
-  },
-
-  showLogin() {
-    domUpdates.addClass([foyer], 'hidden');
-    domUpdates.removeClass([loginView], 'hidden');
+    } 
   },
 
   checkForLogIn() {
@@ -180,8 +151,6 @@ let domUpdates = {
 dateInput.addEventListener('change', domUpdates.updateRightDisplay)
 
 mainDisplayRight.addEventListener('click', domUpdates.determineRightDisplayTarget)
-
-// landingPageGraphic.addEventListener('mouseover', domUpdates.showLogin)
 
 loginButton.addEventListener('click', domUpdates.checkForLogIn)
 
