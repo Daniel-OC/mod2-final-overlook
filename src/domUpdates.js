@@ -41,7 +41,7 @@ let domUpdates = {
   },
 
   updateWithUpcomingBookings(bookingDisplay) {
-    bookingDisplay.innerHTML = '<h2 class="self-center pink-font" tabindex="0">Upcoming Bookings</h2>';
+    bookingDisplay.innerHTML = '<h3 class="self-center pink-font" tabindex="0">Upcoming Bookings</h3>';
     user.upcomingBookings.forEach(booking => {
       bookingDisplay.innerHTML += `
     <section class="flex column around " tabindex="0" >
@@ -52,7 +52,7 @@ let domUpdates = {
   },
 
   updateWithOldBookings(bookingDisplay) {
-    bookingDisplay.innerHTML += '<h3 class="self-center pink-font" tabindex="0">Past Bookings</h3>'
+    bookingDisplay.innerHTML += '<h4 class="self-center pink-font" tabindex="0">Past Bookings</h4>'
     user.pastBookings.forEach(booking => {
       bookingDisplay.innerHTML += `
     <section class="flex column around " tabindex="0">
@@ -144,12 +144,11 @@ let domUpdates = {
       domUpdates.addClass([loginView], 'hidden');
       domUpdates.removeClass([customerView], 'hidden');
       createInitialUser(25).then(handleInitialPromises)
-    // }
+    }
   }
 }
 
 //Event Listeners
-window.addEventListener('load', domUpdates.checkForLogIn)
 
 dateInput.addEventListener('change', domUpdates.updateRightDisplay)
 
