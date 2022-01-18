@@ -19,11 +19,14 @@ import Hotel from './classes/Hotel';
 let user;
 let hotel;
 
-Promise.all([getAllRooms(), getAllBookings(), getAllUsers()])
+const handleInitialPromises = () => {
+  return Promise.all([getAllRooms(), getAllBookings(), getAllUsers()])
   .then(data => {
-    createHotel(data);
+    createHotel(data)
+    updateSite()
   })
   .catch(error => console.log(error))
+}
 
 const createHotel = (data) => {
   hotel = new Hotel(data[0].rooms, data[1].bookings, data[2].customers);
@@ -41,9 +44,8 @@ const updateBookings = (data) => {
 };
 
 const createInitialUser = (id) => {
-  getSingleUser(id).then(data => {
+  return getSingleUser(id).then(data => {
     instantiateUser(data)
-    updateSite()
   })
 };
 
@@ -68,6 +70,7 @@ export {
   createHotel,
   sendBookingToApi,
   createInitialUser, 
-  updateSite
+  updateSite,
+  handleInitialPromises
 }
 
