@@ -1,26 +1,36 @@
-const getInitialUsers =
-  fetch('http://localhost:3001/api/v1/customers	')
-    .then(response => response.json());
+const checkForError = (response) => {
+  if (!response.ok) {
+    throw new Error('Sorry, something went wrong with your booking! Please try again, making sure you picked a date and a room that are available.');
+  } else {
+    return response.json();
+  }
+}
 
-const getSingleUser = (id) => {
-  return fetch(`http://localhost:3001/api/v1/customers/<${id}>`)
-  .then(response => response.json());
+const getAllUsers = () => {
+  return fetch('http://localhost:3001/api/v1/customers')
+    .then(response => response.json())
+    .then(data => data);
 }
   
-const getInitialRooms =
-  fetch('http://localhost:3001/api/v1/rooms	')
-  .then(response => response.json());
-
-const getInitialBookings =
-  fetch('http://localhost:3001/api/v1/bookings')
-  .then(response => response.json());
+const getSingleUser = (id) => {
+  return fetch(`http://localhost:3001/api/v1/customers/${id}`)
+  .then(response => checkForError(response))
+  .then(data => data);
+}
+  
+const getAllRooms = () => {
+  return fetch('http://localhost:3001/api/v1/rooms')
+  .then(response => checkForError(response))
+  .then(data => data);
+}
 
 const getAllBookings = () => {
   return fetch('http://localhost:3001/api/v1/bookings')
-  .then(response => response.json())
+  .then(response => checkForError(response))
+  .then(data => data);
 }
 
-function addNewBooking(bookingUpdate) {
+const addNewBooking = (bookingUpdate) => {
   return fetch('http://localhost:3001/api/v1/bookings', {
     method: "POST",
     headers: {
@@ -28,9 +38,10 @@ function addNewBooking(bookingUpdate) {
     },
     body:JSON.stringify(bookingUpdate)
   })
+  .then(response => checkForError(response))
 };
 
-async function deleteBooking(bookingUpdate) {
+const deleteBooking = (bookingUpdate) => {
   return fetch('http://localhost:3001/api/v1/bookings	', {
     method:"POST",
     headers: {
@@ -38,7 +49,8 @@ async function deleteBooking(bookingUpdate) {
     },
     body:JSON.stringify(bookingUpdate)
   })
+  .then(response => checkForError(response))
 };
 
 
-module.exports = {getInitialUsers, getInitialRooms, getInitialBookings, addNewBooking, deleteBooking, getAllBookings, getSingleUser};
+module.exports = {getAllUsers, getAllRooms, addNewBooking, deleteBooking, getAllBookings, getSingleUser};

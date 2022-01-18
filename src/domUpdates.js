@@ -2,9 +2,11 @@ import {
   user,
   hotel,
   updateHotel,
-  startSite,
   sendBookingToApi,
-  checkForLogIn,
+  createInitialUser,
+  updateSite,
+  createHotel,
+  handleInitialPromises
 } from './scripts'
 
 const dateInput = document.querySelector('#dateSelector');
@@ -162,7 +164,16 @@ let domUpdates = {
     domUpdates.addClass([foyer], 'hidden');
     domUpdates.removeClass([loginView], 'hidden');
   },
-  
+
+  checkForLogIn() {
+    let username = document.querySelector('#enterUserName');
+    let password = document.querySelector('#enterPassword');
+    if (((username.value.slice(0,8) === 'customer') && (username.value.length <= 10)) && password.value === 'overlook2021') {
+      domUpdates.addClass([loginView], 'hidden');
+      domUpdates.removeClass([customerView], 'hidden');
+      createInitialUser(username.value.slice(8,10)).then(handleInitialPromises)
+    }
+  }
 }
 
 //Event Listeners
@@ -170,9 +181,9 @@ dateInput.addEventListener('change', domUpdates.updateRightDisplay)
 
 mainDisplayRight.addEventListener('click', domUpdates.determineRightDisplayTarget)
 
-landingPageGraphic.addEventListener('mouseover', domUpdates.showLogin)
+// landingPageGraphic.addEventListener('mouseover', domUpdates.showLogin)
 
-loginButton.addEventListener('click', checkForLogIn)
+loginButton.addEventListener('click', domUpdates.checkForLogIn)
 
 
 export {
