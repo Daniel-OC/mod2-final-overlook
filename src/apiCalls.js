@@ -8,7 +8,7 @@ const checkForError = (response) => {
 
 const getAllUsers = () => {
   return fetch('http://localhost:3001/api/v1/customers')
-    .then(response => response.json())
+    .then(response => checkForError(response))
     .then(data => data);
 }
   
