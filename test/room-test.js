@@ -1,4 +1,4 @@
-
+import { expect } from "chai";
 import Room from "../src/classes/Room"
 import roomsTestData from "../src/testing-data/rooms-test-data";
 

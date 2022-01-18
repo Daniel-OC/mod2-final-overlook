@@ -13,6 +13,7 @@ import Hotel from './classes/Hotel';
 let user;
 let hotel;
 
+
 const handleInitialPromises = () => {
   return Promise.all([getAllRooms(), getAllBookings(), getAllUsers()])
   .then(data => {

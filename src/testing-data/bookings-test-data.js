@@ -9,7 +9,7 @@ module.exports = [
   {
     "id": "5fwrgu4i7k55hl6t5",
     "userID": 1,
-    "date": "2022/01/24",
+    "date": "2022/01/14",
     "roomNumber": 4,
     "roomServiceCharges": []
   },
