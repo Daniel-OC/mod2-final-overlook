@@ -30,7 +30,7 @@ class Hotel{
   };
 
   filterByRoomType(types) {
-    return hotel.availableRooms.reduce((acc,room) => {
+    return this.availableRooms.reduce((acc,room) => {
       types.forEach(type => {
         if (type === room.roomType) {
           acc.push(room);

@@ -183,14 +183,6 @@ main {
   align-items: flex-end;
 }
 
-// .carpet {
-//   background-image: url('../images/shining\ carpet.png');
-//   background-repeat: no-repeat;
-//   height: 100vh;
-//   width: 10%;
-//   border: 5px solid $dark
-// }
-
 .font-xxl {
   font-size: xxx-large;
 }
@@ -200,7 +192,7 @@ main {
 }
 
 .y-scroll {
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 .sml-mrgn-btm {
