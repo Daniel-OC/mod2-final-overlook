@@ -132,7 +132,6 @@ let domUpdates = {
       domUpdates.updateRightDisplay(event);
     } else if (event.target.classList.contains('button')) {
       sendBookingToApi(dateSelector.value.replaceAll("-","/"), event.target.id);
-      console.log(dateSelector.value)
       domUpdates.congratulateUserOnBooking()
     } 
   },

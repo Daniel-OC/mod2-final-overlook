@@ -52,7 +52,6 @@ describe('Hotel', () => {
 
   it('should return a list of all roomtypes for availableRooms', () => {
     hotel.updateAvailableRooms('2022/02/16');
-    console.log(hotel.availableRooms)
     expect(hotel.getAvailableRoomTypes()).to.deep.equal(['residential suite', 'suite', 'single room'])
 
   })
