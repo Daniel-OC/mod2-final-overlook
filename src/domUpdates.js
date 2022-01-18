@@ -63,7 +63,6 @@ let domUpdates = {
   },
   
   fillRightDisplay(updatedRooms) {
-    console.log(updatedRooms)
     let availableRoomArea = document.querySelector('#bottomRightSection')
     if (updatedRooms.length) {
       availableRoomArea.innerHTML = ''
@@ -98,7 +97,6 @@ let domUpdates = {
     let updatedRooms;
     hotel.updateAvailableRooms(dateSelector.value.replaceAll("-","/"))
     if (event.target.type === 'checkbox') {
-      console.log(hotel)
       user.modifyPreferredTypes(event.target.value)
       updatedRooms = user.preferredTypes.length ? hotel.filterByRoomType(user.preferredTypes) : hotel.availableRooms
     } else {
@@ -131,19 +129,18 @@ let domUpdates = {
     if (event.target.type === 'checkbox') {
       domUpdates.updateRightDisplay(event);
     } else if (event.target.classList.contains('button')) {
-      console.log(event.target.id);
       sendBookingToApi(dateSelector.value.replaceAll("-","/"), event.target.id);
       domUpdates.congratulateUserOnBooking()
     } 
   },
 
   checkForLogIn() {
-    // let username = document.querySelector('#enterUserName');
-    // let password = document.querySelector('#enterPassword');
-    // if (((username.value.slice(0,8) === 'customer') && (username.value.length <= 10)) && password.value === 'overlook2021') {
+    let username = document.querySelector('#enterUserName');
+    let password = document.querySelector('#enterPassword');
+    if (((username.value.slice(0,8) === 'customer') && (username.value.length <= 10)) && password.value === 'overlook2021') {
       domUpdates.addClass([loginView], 'hidden');
       domUpdates.removeClass([customerView], 'hidden');
-      createInitialUser(25).then(handleInitialPromises)
+      createInitialUser(username.value.slice(8,10)).then(handleInitialPromises)
     }
   }
 }

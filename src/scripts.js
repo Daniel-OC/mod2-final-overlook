@@ -24,7 +24,6 @@ const handleInitialPromises = () => {
 
 const createInitialUser = (id) => {
   return getSingleUser(id).then(data => {
-    console.log(data)
     instantiateUser(data)
   }).catch(error => displayFetchErrorMessage(error))
 };
