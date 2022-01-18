@@ -5,7 +5,8 @@ import {
   sendBookingToApi,
   createInitialUser,
   updateSite,
-  createHotel
+  createHotel,
+  handleInitialPromises
 } from './scripts'
 
 const dateInput = document.querySelector('#dateSelector');
@@ -170,10 +171,9 @@ let domUpdates = {
     if (((username.value.slice(0,8) === 'customer') && (username.value.length <= 10)) && password.value === 'overlook2021') {
       domUpdates.addClass([loginView], 'hidden');
       domUpdates.removeClass([customerView], 'hidden');
-      createInitialUser(username.value.slice(8,10))
+      createInitialUser(username.value.slice(8,10)).then(handleInitialPromises)
     }
   }
-  
 }
 
 //Event Listeners
