@@ -23,3 +23,22 @@
   @include height-width("", 80%);
   overflow-y: auto;
 }
+
+.room-card {
+  @include flex-row(space-between);
+  width: 100%;
+}
+
+.room-detail-one {
+  margin:0;
+}
+
+.room-detail-two {
+  font-size: xxx-large;
+  margin:0;
+}
+
+.room-detail-three {
+  @include margin-top-bottom("", 5px);
+  @include margin-sides(0,0);
+}
