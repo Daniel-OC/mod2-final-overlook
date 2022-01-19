@@ -43,10 +43,10 @@ let domUpdates = {
   },
 
   updateWithUpcomingBookings(bookingDisplay) {
-    bookingDisplay.innerHTML = '<h3 class="self-center pink-font" tabindex="0">Upcoming Bookings</h3>';
+    bookingDisplay.innerHTML = '<h3 class="booking-title" tabindex="0">Upcoming Bookings</h3>';
     user.upcomingBookings.forEach(booking => {
       bookingDisplay.innerHTML += `
-    <section class="flex column around " tabindex="0" >
+    <section class="booking-card" tabindex="0" >
     <p>Room ${booking.roomNumber}, ${booking.date}</p>
     <p>$${booking.price}</p>
   </section>`
@@ -54,10 +54,10 @@ let domUpdates = {
   },
 
   updateWithOldBookings(bookingDisplay) {
-    bookingDisplay.innerHTML += '<h4 class="self-center pink-font" tabindex="0">Past Bookings</h4>'
+    bookingDisplay.innerHTML += '<h4 class="booking-title" tabindex="0">Past Bookings</h4>'
     user.pastBookings.forEach(booking => {
       bookingDisplay.innerHTML += `
-    <section class="flex column around " tabindex="0">
+    <section class="booking-card" tabindex="0">
     <p>Room ${booking.roomNumber}, ${booking.date}</p>
     <p>$${booking.price}</p>
   </section>`
@@ -70,16 +70,16 @@ let domUpdates = {
       availableRoomArea.innerHTML = ''
       updatedRooms.forEach(room => {
         availableRoomArea.innerHTML += `
-        <section id="roomCard" class="flex row between full-width" tabindex="0">
+        <section id="roomCard" class="room-card" tabindex="0">
               <section>
-                <p class="margin-none">Room</p>
-                <p class="font-xxl margin-none" tabindex="0">${room.number}</p>
+                <p class="room-detail-one">Room</p>
+                <p class="room-detail-two" tabindex="0">${room.number}</p>
               </section>
               <section class="flex row between">
                 <section class="flex column" >
-                  <p class="sml-mrgn-btm margin-none" tabindex="0">${room.roomType.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</p>
-                  <p class="sml-mrgn-btm margin-none" tabindex="0">Beds: ${room.numBeds} ${room.bedSize.charAt(0).toUpperCase() + room.bedSize.slice(1) }</p>
-                  <p class="sml-mrgn-btm margin-none" tabindex="0">Bidet: ${room.bidet ? 'Yes' : 'No'}</p>
+                  <p class="room-detail-three" tabindex="0">${room.roomType.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</p>
+                  <p class="room-detail-three" tabindex="0">Beds: ${room.numBeds} ${room.bedSize.charAt(0).toUpperCase() + room.bedSize.slice(1) }</p>
+                  <p class="room-detail-three" tabindex="0">Bidet: ${room.bidet ? 'Yes' : 'No'}</p>
                 </section>
               </section>
               <section class="flex column center">
@@ -141,7 +141,7 @@ let domUpdates = {
     let password = document.querySelector('#enterPassword');
     if (((username.value.slice(0,8) === 'customer') && (username.value.length <= 10)) && password.value === 'overlook2021') {
       domUpdates.addClass([loginView], 'hidden');
-      domUpdates.removeClass([customerView], 'hidden');
+      domUpdates.removeClass([customerView, username], 'hidden');
       createInitialUser(username.value.slice(8,10)).then(handleInitialPromises)
     }
   },

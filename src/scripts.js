@@ -24,8 +24,10 @@ const handleInitialPromises = () => {
 }
 
 const createInitialUser = (id) => {
+  const username = document.querySelector('#username')
   return getSingleUser(id).then(data => {
     instantiateUser(data)
+    domUpdates.updateInnerText(username, user.name)
   }).catch(error => displayFetchErrorMessage(error))
 };
 

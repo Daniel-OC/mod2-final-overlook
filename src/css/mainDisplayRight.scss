@@ -1,0 +1,44 @@
+.main-display-right {
+  @include flex-column("",center);
+  @include main-box-background;
+  @include height-width(60vh, 55%);
+}
+
+.top-right-section {
+  @include flex-row(space-between);
+  @include height-width("", 80%);
+  margin-bottom: 10px;
+}
+
+.checkbox-holder {
+  @include flex-column('', center)
+}
+
+.room-checkboxes {
+  overflow-y: auto;
+}
+
+.bottom-right-section {
+  @include flex-column("",flex-start);
+  @include height-width("", 80%);
+  overflow-y: auto;
+}
+
+.room-card {
+  @include flex-row(space-between);
+  width: 100%;
+}
+
+.room-detail-one {
+  margin:0;
+}
+
+.room-detail-two {
+  font-size: xxx-large;
+  margin:0;
+}
+
+.room-detail-three {
+  @include margin-top-bottom("", 5px);
+  @include margin-sides(0,0);
+}

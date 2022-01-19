@@ -1,5 +1,11 @@
 /* This is an example of how to import a partial scss file*/
 @import '_variables';
+@import '_mixins';
+@import 'foyer';
+@import 'loginView';
+@import 'mainDisplayLeft';
+@import 'mainDisplayRight';
+@import 'header';
 
 html { 
   background: url('../images/overlook\ sketch.png') no-repeat center 100px fixed; 
@@ -7,7 +13,6 @@ html {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  
 }
 
 body {
@@ -26,193 +31,9 @@ main {
   background: transparent;
 }
 
-.logo {
-  font-family: 'Monoton', cursive;
-}
-
-.flex {
-	display: flex;
-}
-
-.row {
-	flex-direction: row;
-	align-items: center;
-}
-
-.start {
-	flex-flow: column wrap;
-}
-
-.end {
-	flex-direction: row-reverse;
-}
-
-.column {
-	flex-direction: column;
-	align-items: center;
-}
-
-.around {
-	justify-content: space-around;
-}
-
-.between {
-	justify-content: space-between;
-}
-
-.align-start {
-	align-items: flex-start;
-}
-
-.center {
-	align-self: center;
-	justify-content: center;
-}
-
-.basis {
-	flex-basis: 40%;
-}
-
-.align-center {
-  align-items: center;
-}
-
-.text-center {
-	text-align: center;
-}
-
-.white {
-  background-color: $white;
-}
-
-.dark {
-  background-color: $dark;
-}
-
-.test-bg {
-  background-color: #b0e7f6;
-}
-
-.main-display-bg {
-  background-color: rgba(176, 231, 246, .9);
-  fill-opacity: .5;
-
-}
-.main-display-inner-box {
-  margin: 5px;
-}
-
-.full-width {
-  width: 100%
-}
-
-.gentium {
-  font-family: 'Gentium Book Basic', serif;
-}
-
-.orange-font {
-  color: #b0e7f6;
-  font-family: 'Gentium Book Basic', serif;
-}
-
-.pink-font {
-  color: #36474c;
-}
-
-.dark-background {
-  background-color: #36474c;
-}
-
-.blue-font {
-  color: #b0e7f6
-}
-
-.opening-page {
-  
-  background: linear-gradient(45deg, black, transparent);
-}
-
-.opening-text {
-  font-size: 132px;
-  color: white;
-  padding-bottom: 160px;
-  padding-right: 155px;
-}
-
-.opening-text:hover {
-  color: #36474c
-}
-
-.height-45 {
-  height:45%
-}
-
-.main-display-height {
-  height:60vh;
-}
-
-.margin-none {
-  margin: 0;
-}
-
-.width-80 {
-  width: 80%;
-}
-
-.width-55 {
-  width: 55%
-}
-
-.width-25 {
-  width: 25%;
-}
-
-.height-20 {
-  height: 20%
-}
-
-.height-15 {
-  height: 15%
-}
-
-.text-center {
-  text-align: center;
-}
-
-.align-end {
-  align-items: flex-end;
-}
-
-.font-xxl {
-  font-size: xxx-large;
-}
-
-.font-larger {
-  font-size: larger;
-}
-
-.y-scroll {
-	overflow-y: auto;
-}
-
-.sml-mrgn-btm {
-  margin-bottom: 5px;
-}
-
-.med-mrgn-btm {
-  margin-bottom: 10px;
-}
-
-.dark {
-  background-color: $dark;
-}
-
-.full-height {
-  height: 100vh
-}
-
-.align-start {
-  align-items: flex-start;
+.customer-view {
+  @include flex-row(space-around, center);
+  @include height-width(100%)
 }
 
 .hidden {

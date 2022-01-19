@@ -1,0 +1,10 @@
+.login-view {
+  @include flex-column(space-around, center);
+  @include height-width(100%, 100%);
+}
+
+.login-container {
+  @include flex-column(center, center);
+  @include height-width(45%, 55%);
+  @include main-box-background
+}

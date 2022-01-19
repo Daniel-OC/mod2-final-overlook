@@ -11,88 +11,50 @@
   <title>Come Play With Us!</title>
 </head>
 <body>
-  
-  <main class="">
-    <header class="flex between test-bg dark-background height-15">
-      <section class="flex row align-end">
-        <h1 id="headerText" class="font-xxl orange-font margin-none">THE OVERLOOK</h1>
+  <main>
+    <header>
+      <section>
+        <h1 id="headerText" class="logo">THE OVERLOOK</h1>
       </section>
-      <section id="userGraphics" class="flex between blue-font">
-        <p id="username"class>username</p>
-        <p id="userIcon">U</p>
+      <section id="userGraphics" class="username-holder">
+        <p id="username"class="hidden">username</p>
       </section>
     </header>
-    <section id="foyer" class="flex column opening-page around center full-height full-width align-center">
-      <p id ="openingGraphic" class="gentium opening-text" tabindex="0">come play with us!</p>
+    <section id="foyer" class="foyer-view">
+      <p id ="openingGraphic" class="foyer-text" tabindex="0">come play with us!</p>
     </section>
-    <section id="loginView" class="flex column around center full-width full-height hidden">
-      <section id="loginContainer" class ="flex column around center width-55 height-45 main-display-bg">
-        <input id="enterUserName" type="text">
-        <label for="enterUserName">Username</label>
-        <input id="enterPassword" type="text">
-        <label for="enterPassword">Password</label>
+    <section id="loginView" class="login-view hidden">
+      <section id="loginContainer" class ="login-container">
+          <input id="enterUserName" type="text">
+          <label for="enterUserName">Username</label> 
+          <input id="enterPassword" type="password">
+          <label for="enterPassword">Password</label>
         <button id="loginButton" >login</button>
       </section>
     </section>
-    <section id="customerView" class="flex around align-center full-height hidden">
-      <section id="mainDisplayLeft" class="flex column main-display-bg main-display-height width-25">
-        <section class="flex column height-20 center text-center width-80 main-display-inner-box">
-          <p class="margin-none pink-font font-larger">Total Spent With the Overlook</p>
-          <h2 id="totalCost" class="font-xxl margin-none">$1,265.46</h2>
+    <section id="customerView" class="customer-view hidden">
+      <section id="mainDisplayLeft" class="main-display-left">
+        <section class="total-cost-box">
+          <p class="total-cost-declaration">Total Spent With the Overlook</p>
+          <h2 id="totalCost" class="total-cost">$1,265.46</h2>
         </section>
-        <section id="bookingDisplay" class="primary-bright flex column y-scroll sml-mrgn-btm" tabindex="0">
-          <h3 class="self-center pink-font">Upcoming Bookings</h3>
-          <section>
-            <section class="flex around ">
-              <p>Booking 1</p>
-              <p>$549.21</p>
-            </section>
-            <section class="flex around">
-              <p>Booking 2</p>
-              <p>$354.96</p>
-            </section>
-            <section class="flex around">
-              <p>Booking 1</p>
-              <p>$549.21</p>
-            </section>
-            <section class="flex around">
-              <p>Booking 2</p>
-              <p>$354.96</p>
-            </section>
-            <h3 class="self-center pink-font">Past Bookings</h3>
-            <section class="flex row around">
-              <p>Booking 3</p>
-              <p> $549.21</p>
-            </section>
-            <section class="flex row around">
-              <p>Booking 4</p>
-              <p> $354.96</p>
-            </section>
-            <section class="flex around">
-              <p>Booking 1</p>
-              <p>$549.21</p>
-            </section>
-            <section class="flex around">
-              <p>Booking 2</p>
-              <p>$354.96</p>
-            </section>
-          </section>
+        <section id="bookingDisplay" class="booking-display" tabindex="0">
         </section>
       </section>
-      <section id="mainDisplayRight" class="flex column main-display-bg main-display-height width-55">
-        <section id="topRightSection" class="flex row width-80 between med-mrgn-btm">
-          <section id="titleAndCalendar flex column">
+      <section id="mainDisplayRight" class="main-display-right">
+        <section id="topRightSection" class="top-right-section">
+          <section id="titleAndCalendar">
             <h4>come play with us!</h3>
             <input id="dateSelector" type="date">
             <label for="dateSelector">Choose your preferred date</label>
           </section>
-          <section id="filtersForRoomType" class="flex column">
+          <section id="filtersForRoomType" class="checkbox-holder">
             <h4>Room Type</h4>
-            <section id="roomCheckBoxes" class="y-scroll">
+            <section id="roomCheckBoxes" class="room-checkboxes">
             </section>
           </section> 
         </section>
-        <section id="bottomRightSection" class="flex column align-start width-80 y-scroll">
+        <section id="bottomRightSection" class="bottom-right-section">
           <p>Pick a date to check room availability</p>
         </section>
       </section>
