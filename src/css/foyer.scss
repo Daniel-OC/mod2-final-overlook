@@ -1,0 +1,19 @@
+.foyer-view {
+  @include flex-column(space-around, center); 
+  @include height-width(100%, 100%);
+  background: linear-gradient(45deg, black, transparent);
+}
+
+.foyer-text {
+  @include padding-sides("", 155px);
+  @include padding-top-bottom("", 160px);
+  font-family: 'Gentium Book Basic', serif;
+  font-size: 132px;
+  color: $white;
+  &:hover {
+    color: $dark-blue;
+  }
+}
+
+
+//NEEDS HOVER STATE

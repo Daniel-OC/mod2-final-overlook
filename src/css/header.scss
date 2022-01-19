@@ -1,0 +1,20 @@
+header {
+  @include flex-row(space-between, flex-end);
+  background-color: $dark-blue;
+  height: 20%;
+}
+
+.logo {
+  font-family: 'Monoton', cursive;
+  font-size: xxx-large;
+  color: $light-blue;
+  font-family: 'Gentium Book Basic', serif;
+  margin:0;
+  margin-left: 5px
+}
+
+.username-holder {
+  @include flex-row(space-between);
+  color: $light-blue;
+  margin-right: 5px;
+}

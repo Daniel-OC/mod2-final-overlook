@@ -1,5 +1,11 @@
 /* This is an example of how to import a partial scss file*/
 @import '_variables';
+@import '_mixins';
+@import 'foyer';
+@import 'loginView';
+@import 'mainDisplayLeft';
+@import 'mainDisplayRight';
+@import 'header';
 
 html { 
   background: url('../images/overlook\ sketch.png') no-repeat center 100px fixed; 
@@ -7,7 +13,6 @@ html {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  
 }
 
 body {
@@ -26,9 +31,12 @@ main {
   background: transparent;
 }
 
-.logo {
-  font-family: 'Monoton', cursive;
+.customer-view {
+  @include flex-row(space-around, center);
+  @include height-width(100%)
 }
+
+
 
 .flex {
 	display: flex;
@@ -85,16 +93,8 @@ main {
   background-color: $white;
 }
 
-.dark {
-  background-color: $dark;
-}
-
-.test-bg {
-  background-color: #b0e7f6;
-}
-
 .main-display-bg {
-  background-color: rgba(176, 231, 246, .9);
+  background-color: $box-background;
   fill-opacity: .5;
 
 }
@@ -111,36 +111,31 @@ main {
 }
 
 .orange-font {
-  color: #b0e7f6;
+  color: $light-blue;
   font-family: 'Gentium Book Basic', serif;
 }
 
 .pink-font {
-  color: #36474c;
+  color: $dark-blue;
 }
 
 .dark-background {
-  background-color: #36474c;
+  background-color: $dark-blue;
 }
 
 .blue-font {
-  color: #b0e7f6
-}
-
-.opening-page {
-  
-  background: linear-gradient(45deg, black, transparent);
+  color: $light-blue
 }
 
 .opening-text {
   font-size: 132px;
-  color: white;
+  color: $white;
   padding-bottom: 160px;
   padding-right: 155px;
 }
 
 .opening-text:hover {
-  color: #36474c
+  color: $dark-blue
 }
 
 .height-45 {
@@ -201,10 +196,6 @@ main {
 
 .med-mrgn-btm {
   margin-bottom: 10px;
-}
-
-.dark {
-  background-color: $dark;
 }
 
 .full-height {
